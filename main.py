@@ -8,6 +8,8 @@ app = FastAPI()
 @app.post("/q")
 async def q(request: Request):
     req_data = await request.json()
+    if 'db' not in req_data or 'q' not in req_data:
+        return JSONResponse(content={'res': 'NOK', 'err': 'Missing parameters - Most have q and db'})
 
     queries = req_data['q'].split(';');
     queries = list(filter(None, queries))
