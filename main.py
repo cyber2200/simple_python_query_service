@@ -12,5 +12,6 @@ app = FastAPI()
 
 @app.post("/q")
 async def q(qbody: Qbody):
-    res = Db.test(qbody.q, qbody.db)
+    db = Db()
+    res = db.q(qbody.q, qbody.db)
     return JSONResponse(content=res)

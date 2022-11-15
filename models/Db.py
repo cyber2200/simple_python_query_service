@@ -1,7 +1,7 @@
 import mysql.connector
 
 class Db:
-    def test(q, db):
+    def q(self, q, db):
         # Split query
         queries = q.split(';');
         queries = list(filter(None, queries))
