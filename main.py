@@ -1,12 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from models.Qbody import Qbody
 from models.Db import Db
-import mysql.connector
-
-class Qbody(BaseModel):
-    db: str
-    q: str
 
 app = FastAPI()
 
