@@ -2,23 +2,25 @@ from fastapi import FastAPI, Body
 from fastapi.responses import JSONResponse
 from models.Qbody import Qbody
 from models.Db import Db
-
+from models.Examples import Examples
 app = FastAPI()
 
 # --------------------------------------------------------
-qbody_example = {
-    "res": "OK",
-    "q_res": [
-        {
-            "id": "1",
-            "msg": "123",
-            "ts": "2022-11-15 19:45:12"
-        }
-    ]
-}
+@app.post(
+    "/q",
+    response_model=Qbody,
+    responses={
+        200: {
+            "content": {
+                "application/json": {
+                    "example": Examples.qbody_response_example
+                }
+            },
+        },
+    },
 
-@app.post("/q")
-async def q(qbody: Qbody = Body(example = qbody_example)):
+)
+async def q(qbody: Qbody = Body(example= Examples.qbody_request_example)):
     db = Db()
     res = db.q(qbody.q, qbody.db)
     return JSONResponse(content=res)
