@@ -78,6 +78,6 @@ class Db:
                 res.append({'q' + str(qc): q_res})
                 qc = qc + 1
             except mysql.connector.Error as err:
-                return {'res': 'NOK', 'err': str(err)}
+                return {'res': 'NOK', 'data': [], 'err': str(err)}
         
-        return {'res': 'OK', 'res': res}
+        return {'res': 'OK', 'data': res, 'err': ''}

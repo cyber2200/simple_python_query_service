@@ -9,19 +9,15 @@ app = FastAPI()
 @app.post(
     "/q",
     response_model=Qbody,
-    responses={
-        200: {
-            "content": {
-                "application/json": {
-                    "example": Examples.qbody_response_example
-                }
-            },
-        },
-    },
+    responses=Examples.qbody_responses
 
 )
 async def q(qbody: Qbody = Body(example= Examples.qbody_request_example)):
     db = Db()
     res = db.q(qbody.q, qbody.db)
-    return JSONResponse(content=res)
+    ret_code = 200
+    if res['err'] != '':
+        ret_code = 500
+    
+    return JSONResponse(content=res, status_code=ret_code)
 # --------------------------------------------------------
