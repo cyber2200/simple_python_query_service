@@ -65,13 +65,10 @@ class Db:
                     for column in table_desc:
                         column_names.append(column[0])
                     rows = []
-                    print('---------------------')
                     for row2 in q_res:
                         t_row = {}
                         i = 0
                         for column_name in column_names:
-                            print(row2)
-                            print(i)
                             t_row[column_name] = row2[i]
                             i = i + 1
                         rows.append(t_row)
